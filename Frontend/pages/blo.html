@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Electra election management system academic project">
+  <title>BLO Dashboard | Electra</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/main.js"></script>
+  <script defer src="../js/auth.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">✓</span><span>Electra<br><small style="font-weight:500;color:#cbd5e1">Election Management</small></span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#faq">FAQs</a>
+      <a href="results.html">Results</a>
+      <a class="btn btn-gold btn-small" href="login.html">Login</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-title"><div class="eyebrow" style="color:var(--blue)">BLO workspace</div><h1>Booth Level Officer dashboard</h1><p class="muted">A sample workspace for reviewing voter applications and document checks.</p></section>
+<div class="stat-row"><div class="stat"><strong>12</strong><span>Assigned applications · sample</span></div><div class="stat"><strong>05</strong><span>Pending review · sample</span></div><div class="stat"><strong>07</strong><span>Reviewed · sample</span></div></div>
+<section class="section"><div class="section-head"><div><h2>Application review queue</h2><p class="muted">Sample data, not connected to a database.</p></div><button class="btn btn-secondary btn-small" data-demo="Refresh will work after the API is connected.">Refresh queue</button></div>
+<div class="table-wrap"><table><thead><tr><th>Reference</th><th>Applicant</th><th>Request</th><th>Status</th><th>Action</th></tr></thead><tbody>
+<tr><td>APP-DEMO-001</td><td>Sample Applicant A</td><td>New registration</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-small" data-demo="Review action requires a backend endpoint.">Review</button></td></tr>
+<tr><td>APP-DEMO-002</td><td>Sample Applicant B</td><td>Details update</td><td><span class="status">Reviewed</span></td><td><button class="btn btn-secondary btn-small" data-demo="Details are illustrative only.">View</button></td></tr>
+<tr><td>APP-DEMO-003</td><td>Sample Applicant C</td><td>Replacement ID</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-small" data-demo="Review action requires a backend endpoint.">Review</button></td></tr>
+</tbody></table></div></section>
+<section class="section panel"><h2>Record review outcome</h2><p class="muted">This form is a UI placeholder for a future application status update.</p>
+<form data-demo-form data-success="Review outcome validated. No application status changed."><div class="form-grid">
+<div class="field"><label for="app-ref">Application reference</label><input id="app-ref" required placeholder="APP-DEMO-001"></div>
+<div class="field"><label for="review-outcome">Outcome</label><select id="review-outcome" required><option value="">Choose outcome</option><option>Recommend approval</option><option>Request more information</option><option>Recommend rejection</option></select></div>
+<div class="field full"><label for="review-notes">Review notes</label><textarea id="review-notes" required></textarea></div>
+</div><div class="form-actions"><button class="btn" type="submit">Validate review</button></div></form>
+</section>
+
+</main>
+<footer class="site-footer"><div class="footer-inner">
+  <span>© <span data-current-year></span> Electra · Academic DBMS project</span>
+  <span>Demonstration interface — not an official election service.</span>
+</div></footer><div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

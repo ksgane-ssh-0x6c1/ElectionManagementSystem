@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Electra election management system academic project">
+  <title>Voter Services | Electra</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/main.js"></script>
+  <script defer src="../js/auth.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">✓</span><span>Electra<br><small style="font-weight:500;color:#cbd5e1">Election Management</small></span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#faq">FAQs</a>
+      <a href="results.html">Results</a>
+      <a class="btn btn-gold btn-small" href="login.html">Login</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-title"><div class="eyebrow" style="color:var(--blue)">Voter portal</div><h1>Voter services</h1><p class="muted">Manage voter-related requests and find your polling booth information.</p></section>
+<div class="stat-row"><div class="stat"><strong>01</strong><span>Profile overview</span></div><div class="stat"><strong>02</strong><span>Application tracking</span></div><div class="stat"><strong>03</strong><span>Booth information</span></div></div>
+<div class="grid two">
+  <section class="panel"><h2>Voter application</h2><p class="muted">Submit a sample application request. The backend will later save it in VOTER_APPLICATION.</p>
+    <form data-demo-form data-success="Application form validated. No application was submitted or stored." data-reset="true">
+      <div class="form-grid">
+        <div class="field"><label for="full-name">Full name</label><input id="full-name" required placeholder="Enter full name"></div>
+        <div class="field"><label for="dob">Date of birth</label><input id="dob" type="date" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" required placeholder="name@example.com"></div>
+        <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" pattern="[0-9 +()-]{8,16}" required placeholder="Contact number"></div>
+        <div class="field full"><label for="address">Residential address</label><textarea id="address" required placeholder="Enter address"></textarea></div>
+        <div class="field"><label for="application-type">Application type</label><select id="application-type" required><option value="">Choose type</option><option>New voter registration</option><option>Update voter details</option><option>Replacement voter ID</option></select></div>
+        <div class="field"><label for="booth">Preferred booth / area</label><input id="booth" placeholder="Area or booth code"></div>
+      </div>
+      <div class="notice">Demo form only. Do not enter real personal or identity information.</div>
+      <div class="form-actions"><button class="btn" type="submit">Validate application</button><button class="btn btn-secondary" type="reset">Clear</button></div>
+    </form>
+  </section>
+  <div>
+    <section class="card"><div class="card-icon">📍</div><h2>Find your booth</h2><p>Search by booth code or area. Live lookup will be connected to the BOOTH table.</p><form data-demo-form data-success="Booth lookup UI tested. Connect the BOOTH API to return real records."><div class="field"><label for="booth-search">Booth code / area</label><input id="booth-search" required placeholder="e.g. BTH-001"></div><div class="form-actions"><button class="btn" type="submit">Search booth</button></div></form></section>
+    <section class="card" style="margin-top:18px"><div class="card-icon">🧾</div><h2>Track application</h2><p>Use the application reference issued by the backend.</p><form data-demo-form data-success="Tracking UI tested. No application record was queried."><div class="field"><label for="reference">Application reference</label><input id="reference" required placeholder="e.g. APP-2026-001"></div><div class="form-actions"><button class="btn btn-secondary" type="submit">Check status</button></div></form></section>
+  </div>
+</div>
+
+</main>
+<footer class="site-footer"><div class="footer-inner">
+  <span>© <span data-current-year></span> Electra · Academic DBMS project</span>
+  <span>Demonstration interface — not an official election service.</span>
+</div></footer><div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

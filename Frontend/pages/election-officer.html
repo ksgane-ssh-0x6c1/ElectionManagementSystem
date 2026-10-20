@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Electra election management system academic project">
+  <title>Election Officer | Electra</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <script defer src="../js/main.js"></script>
+  <script defer src="../js/auth.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="nav-wrap">
+    <a class="brand" href="index.html"><span class="brand-mark">✓</span><span>Electra<br><small style="font-weight:500;color:#cbd5e1">Election Management</small></span></a>
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#faq">FAQs</a>
+      <a href="results.html">Results</a>
+      <a class="btn btn-gold btn-small" href="login.html">Login</a>
+    </nav>
+  </div>
+</header>
+<main>
+
+<section class="page-title"><div class="eyebrow" style="color:var(--blue)">Administration</div><h1>Election Officer dashboard</h1><p class="muted">A prototype for reviewing escalated applications and monitoring election setup.</p></section>
+<div class="stat-row"><div class="stat"><strong>24</strong><span>Total applications · sample</span></div><div class="stat"><strong>08</strong><span>Awaiting decision · sample</span></div><div class="stat"><strong>03</strong><span>Election notices · sample</span></div></div>
+<section class="section"><div class="section-head"><div><h2>Officer review queue</h2><p class="muted">Only illustrative sample records are shown.</p></div><button class="btn btn-secondary btn-small" data-demo="Queue refresh requires backend integration.">Refresh</button></div>
+<div class="table-wrap"><table><thead><tr><th>Reference</th><th>Type</th><th>BLO recommendation</th><th>Status</th><th>Decision</th></tr></thead><tbody>
+<tr><td>APP-DEMO-011</td><td>New registration</td><td>Recommend approval</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-small" data-demo="Approval requires authorization and a backend API.">Review</button></td></tr>
+<tr><td>APP-DEMO-012</td><td>Details update</td><td>More information</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-small" data-demo="Approval requires authorization and a backend API.">Review</button></td></tr>
+<tr><td>APP-DEMO-013</td><td>Replacement ID</td><td>Recommend rejection</td><td><span class="status pending">Pending</span></td><td><button class="btn btn-small" data-demo="Approval requires authorization and a backend API.">Review</button></td></tr>
+</tbody></table></div></section>
+<section class="section grid two">
+<div class="panel"><h2>Application decision</h2><form data-demo-form data-success="Decision form validated. No decision was saved."><div class="field"><label for="officer-app">Application reference</label><input id="officer-app" required></div><div class="field" style="margin-top:14px"><label for="decision">Final decision</label><select id="decision" required><option value="">Select decision</option><option>Approve</option><option>Reject</option><option>Return for correction</option></select></div><div class="field" style="margin-top:14px"><label for="decision-notes">Decision remarks</label><textarea id="decision-notes" required></textarea></div><div class="form-actions"><button class="btn" type="submit">Validate decision</button></div></form></div>
+<div class="card"><div class="card-icon">🗓️</div><h2>Election setup</h2><p>Planned feature for a future ELECTION table and admin-only endpoints.</p><form data-demo-form data-success="Election setup form validated. No election was created."><div class="field"><label for="election-name">Election name</label><input id="election-name" required placeholder="e.g. Student Council Election"></div><div class="field" style="margin-top:14px"><label for="election-date">Election date</label><input id="election-date" type="date" required></div><div class="field" style="margin-top:14px"><label for="election-status">Status</label><select id="election-status" required><option value="">Select status</option><option>Draft</option><option>Scheduled</option><option>Completed</option></select></div><div class="form-actions"><button class="btn btn-secondary" type="submit">Validate setup</button></div></form></div>
+</section>
+
+</main>
+<footer class="site-footer"><div class="footer-inner">
+  <span>© <span data-current-year></span> Electra · Academic DBMS project</span>
+  <span>Demonstration interface — not an official election service.</span>
+</div></footer><div class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
