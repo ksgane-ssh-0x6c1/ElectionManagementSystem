@@ -1,0 +1,2 @@
+# ElectionManagementSystem
+DBMS miniproject.
