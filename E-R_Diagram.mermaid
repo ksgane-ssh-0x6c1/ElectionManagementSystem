@@ -1,0 +1,109 @@
+
+erDiagram
+    USERS {
+        int id PK
+        enum role
+        varchar full_name
+        varchar username UK
+        varchar email UK
+        varchar password_hash
+        boolean is_active
+        timestamp created_at
+    }
+
+    BOOTHS {
+        int id PK
+        varchar code UK
+        varchar name
+        varchar area
+        text address
+    }
+
+    VOTERS {
+        int id PK
+        int user_id FK
+        varchar phone
+        text address
+        date dob
+        int booth_id FK
+    }
+
+    PARTIES {
+        int id PK
+        int user_id FK
+        varchar party_name
+        varchar symbol
+        varchar contact_email
+        text manifesto
+    }
+
+    CANDIDATES {
+        int id PK
+        int user_id FK
+        varchar candidate_name
+        int party_id FK
+        varchar constituency
+        varchar contact_email
+        text bio
+    }
+
+    ELECTIONS {
+        int id PK
+        varchar name
+        text description
+        date election_date
+        enum status
+        int created_by FK
+        timestamp created_at
+    }
+
+    ELECTION_CANDIDATES {
+        int id PK
+        int election_id FK
+        int candidate_id FK
+        int booth_id FK
+    }
+
+    VOTER_APPLICATIONS {
+        int id PK
+        varchar reference_code UK
+        int voter_id FK
+        enum application_type
+        date dob
+        varchar phone
+        text address
+        int booth_id FK
+        enum status
+        text review_notes
+        int reviewed_by FK
+        timestamp created_at
+    }
+
+    VOTES {
+        bigint id PK
+        int election_id FK
+        int voter_id FK
+        int candidate_id FK
+        timestamp cast_at
+    }
+
+    USERS ||--o| VOTERS : "has profile"
+    USERS ||--o| PARTIES : "has profile"
+    USERS ||--o| CANDIDATES : "has profile"
+
+    USERS ||--o{ ELECTIONS : "creates"
+    USERS ||--o{ VOTER_APPLICATIONS : "reviews"
+
+    BOOTHS ||--o{ VOTERS : "assigned to"
+    BOOTHS ||--o{ ELECTION_CANDIDATES : "hosts"
+    BOOTHS ||--o{ VOTER_APPLICATIONS : "requested for"
+
+    PARTIES ||--o{ CANDIDATES : "nominates"
+
+    ELECTIONS ||--o{ ELECTION_CANDIDATES : "includes"
+    CANDIDATES ||--o{ ELECTION_CANDIDATES : "participates in"
+
+    VOTERS ||--o{ VOTER_APPLICATIONS : "submits"
+    ELECTIONS ||--o{ VOTES : "receives"
+    VOTERS ||--o{ VOTES : "casts"
+    CANDIDATES ||--o{ VOTES : "receives"
