@@ -8,7 +8,6 @@ erDiagram
         varchar email UK
         varchar password_hash
         boolean is_active
-        timestamp created_at
     }
 
     BOOTHS {
@@ -34,7 +33,6 @@ erDiagram
         varchar party_name
         varchar symbol
         varchar contact_email
-        text manifesto
     }
 
     CANDIDATES {
@@ -43,18 +41,14 @@ erDiagram
         varchar candidate_name
         int party_id FK
         varchar constituency
-        varchar contact_email
-        text bio
     }
 
     ELECTIONS {
         int id PK
         varchar name
-        text description
         date election_date
         enum status
         int created_by FK
-        timestamp created_at
     }
 
     ELECTION_CANDIDATES {
@@ -66,17 +60,12 @@ erDiagram
 
     VOTER_APPLICATIONS {
         int id PK
-        varchar reference_code UK
         int voter_id FK
+        varchar reference_code UK
         enum application_type
-        date dob
-        varchar phone
-        text address
         int booth_id FK
         enum status
-        text review_notes
         int reviewed_by FK
-        timestamp created_at
     }
 
     VOTES {
@@ -90,7 +79,6 @@ erDiagram
     USERS ||--o| VOTERS : "has profile"
     USERS ||--o| PARTIES : "has profile"
     USERS ||--o| CANDIDATES : "has profile"
-
     USERS ||--o{ ELECTIONS : "creates"
     USERS ||--o{ VOTER_APPLICATIONS : "reviews"
 
@@ -99,7 +87,6 @@ erDiagram
     BOOTHS ||--o{ VOTER_APPLICATIONS : "requested for"
 
     PARTIES ||--o{ CANDIDATES : "nominates"
-
     ELECTIONS ||--o{ ELECTION_CANDIDATES : "includes"
     CANDIDATES ||--o{ ELECTION_CANDIDATES : "participates in"
 
@@ -107,3 +94,13 @@ erDiagram
     ELECTIONS ||--o{ VOTES : "receives"
     VOTERS ||--o{ VOTES : "casts"
     CANDIDATES ||--o{ VOTES : "receives"
+
+    style USERS fill:#174A7E,color:#FFFFFF,stroke:#0B2E50,stroke-width:3px
+    style VOTERS fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style PARTIES fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style CANDIDATES fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style BOOTHS fill:#7651A8,color:#FFFFFF,stroke:#4B2878,stroke-width:2px
+    style ELECTIONS fill:#A85D16,color:#FFFFFF,stroke:#713B08,stroke-width:2px
+    style ELECTION_CANDIDATES fill:#A85D16,color:#FFFFFF,stroke:#713B08,stroke-width:2px
+    style VOTER_APPLICATIONS fill:#8A397C,color:#FFFFFF,stroke:#5B2051,stroke-width:2px
+    style VOTES fill:#A52E35,color:#FFFFFF,stroke:#711C22,stroke-width:3px
