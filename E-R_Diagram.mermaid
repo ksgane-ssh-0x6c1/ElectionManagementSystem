@@ -1,0 +1,152 @@
+%% Electra ER diagram — aligned with Backend/database/schema.sql
+%% Ballot privacy model:
+%% - VOTER_PARTICIPATION stores voter_id + election_id only (one row per voter/election).
+%% - BALLOTS stores a random UUID + election_id + candidate_id only.
+%% - There is deliberately no FK or shared identifier between these two tables.
+%% - BALLOTS references the ELECTION_CANDIDATES pair so only assigned candidates are valid.
+%% This reduces direct linkability; it is not cryptographic anonymity or certified election security.
+
+erDiagram
+    USERS {
+        int id PK
+        enum role
+        varchar full_name
+        varchar username UK
+        varchar email UK
+        varchar password_hash
+        boolean is_active
+        boolean email_verified
+        datetime email_verified_at
+        timestamp created_at
+    }
+
+    BOOTHS {
+        int id PK
+        varchar code UK
+        varchar name
+        varchar area
+        text address
+    }
+
+    VOTERS {
+        int id PK
+        int user_id FK,UK
+        varchar phone
+        text address
+        date dob
+        int booth_id FK
+    }
+
+    PARTIES {
+        int id PK
+        int user_id FK,UK
+        varchar party_name
+        varchar symbol
+        varchar contact_email
+        text manifesto
+    }
+
+    CANDIDATES {
+        int id PK
+        int user_id FK,UK
+        varchar candidate_name
+        int party_id FK
+        varchar constituency
+        varchar contact_email
+        text bio
+    }
+
+    ELECTIONS {
+        int id PK
+        varchar name
+        text description
+        date election_date
+        enum status
+        int created_by FK
+        timestamp created_at
+    }
+
+    ELECTION_CANDIDATES {
+        int id PK
+        int election_id FK,UK
+        int candidate_id FK,UK
+        int booth_id FK
+    }
+
+    VOTER_APPLICATIONS {
+        int id PK
+        varchar reference_code UK
+        int voter_id FK
+        enum application_type
+        date dob
+        varchar phone
+        text address
+        int booth_id FK
+        enum status
+        text review_notes
+        int reviewed_by FK
+        timestamp created_at
+    }
+
+    VOTER_PARTICIPATION {
+        int election_id PK,FK
+        int voter_id PK,FK
+    }
+
+    BALLOTS {
+        char(36) id PK
+        int election_id FK
+        int candidate_id FK
+    }
+
+    EMAIL_VERIFICATION_TOKENS {
+        bigint id PK
+        int user_id FK
+        char(64) token_hash UK
+        datetime expires_at
+        timestamp created_at
+    }
+
+    PASSWORD_RESET_TOKENS {
+        bigint id PK
+        int user_id FK
+        char(64) token_hash UK
+        datetime expires_at
+        timestamp created_at
+    }
+
+    USERS ||--o| VOTERS : "has profile"
+    USERS ||--o| PARTIES : "has profile"
+    USERS ||--o| CANDIDATES : "has profile"
+    USERS ||--o{ ELECTIONS : "creates"
+    USERS ||--o{ VOTER_APPLICATIONS : "reviews"
+    USERS ||--o{ EMAIL_VERIFICATION_TOKENS : "verifies email"
+    USERS ||--o{ PASSWORD_RESET_TOKENS : "resets password"
+
+    BOOTHS ||--o{ VOTERS : "assigned to"
+    BOOTHS ||--o{ ELECTION_CANDIDATES : "hosts"
+    BOOTHS ||--o{ VOTER_APPLICATIONS : "requested for"
+
+    PARTIES ||--o{ CANDIDATES : "nominates"
+    ELECTIONS ||--o{ ELECTION_CANDIDATES : "includes"
+    CANDIDATES ||--o{ ELECTION_CANDIDATES : "participates in"
+
+    VOTERS ||--o{ VOTER_APPLICATIONS : "submits"
+    VOTERS ||--o{ VOTER_PARTICIPATION : "participates"
+    ELECTIONS ||--o{ VOTER_PARTICIPATION : "tracks turnout"
+    ELECTION_CANDIDATES ||--o{ BALLOTS : "receives anonymous choice records"
+
+    %% Intentionally no relationship between VOTER_PARTICIPATION and BALLOTS.
+
+    style USERS fill:#174A7E,color:#FFFFFF,stroke:#0B2E50,stroke-width:3px
+    style VOTERS fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style PARTIES fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style CANDIDATES fill:#176B50,color:#FFFFFF,stroke:#0B4935,stroke-width:2px
+    style BOOTHS fill:#7651A8,color:#FFFFFF,stroke:#4B2878,stroke-width:2px
+    style ELECTIONS fill:#A85D16,color:#FFFFFF,stroke:#713B08,stroke-width:2px
+    style ELECTION_CANDIDATES fill:#A85D16,color:#FFFFFF,stroke:#713B08,stroke-width:2px
+    style VOTER_APPLICATIONS fill:#8A397C,color:#FFFFFF,stroke:#5B2051,stroke-width:2px
+    style VOTER_PARTICIPATION fill:#A52E35,color:#FFFFFF,stroke:#711C22,stroke-width:2px
+    style BALLOTS fill:#A52E35,color:#FFFFFF,stroke:#711C22,stroke-width:3px
+    style EMAIL_VERIFICATION_TOKENS fill:#315A82,color:#FFFFFF,stroke:#193A5B,stroke-width:2px
+    style PASSWORD_RESET_TOKENS fill:#315A82,color:#FFFFFF,stroke:#193A5B,stroke-width:2px
