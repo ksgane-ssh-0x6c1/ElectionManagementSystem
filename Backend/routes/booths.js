@@ -1,5 +1,0 @@
-const router=require('express').Router();const db=require('../config/db');const {authenticate,allowRoles}=require('../middleware/auth');
-router.get('/',async(req,res,next)=>{try{const [rows]=await db.execute('SELECT id,code,name,area,address FROM booths ORDER BY code');res.json(rows);}catch(e){next(e);}});
-router.get('/search/:code',async(req,res,next)=>{try{const [rows]=await db.execute('SELECT id,code,name,area,address FROM booths WHERE code=?',[req.params.code]);if(!rows.length)return res.status(404).json({error:'Booth not found.'});res.json(rows[0]);}catch(e){next(e);}});
-router.post('/',authenticate,allowRoles('Election Officer','DBA'),async(req,res,next)=>{try{const {code,name,area,address}=req.body;if(!code||!name)return res.status(400).json({error:'code and name are required.'});const [r]=await db.execute('INSERT INTO booths(code,name,area,address) VALUES(?,?,?,?)',[code,name,area||null,address||null]);res.status(201).json({id:r.insertId,message:'Booth created.'});}catch(e){next(e);}});
-module.exports=router;
