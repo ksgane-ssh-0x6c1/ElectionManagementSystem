@@ -1,5 +1,3 @@
-# Electra — Election Management System (Academic DBMS Project)
-
 Electra is an academic demonstration built with HTML, CSS, browser JavaScript, Node.js/Express and MySQL. It includes registration and login, email verification and password reset, voter applications, booth lookup, staff review, party/candidate profiles, election setup, voting eligibility, ballot submission and published results.
 
 > **Academic-use warning:** Electra is not certified election software and must not be used for a real public election or real voter data. The voting database has been improved to separate voter participation from ballot choices, but it does not provide cryptographic anonymity, end-to-end verifiability, coercion resistance, or protection against a malicious database owner or compromised server.
